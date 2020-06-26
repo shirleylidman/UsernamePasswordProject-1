@@ -4,11 +4,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using UsernamePasswordProject.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace UsernamePasswordProject
+namespace UsernamePasswordProject.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ShowDataPage : ContentPage
@@ -22,22 +22,42 @@ namespace UsernamePasswordProject
             public string Password { get; set; }
         }
         */
-        
-        public ShowDataPage()
+
+        public MainPageViewModel _mainPageViewModel { get; set; }
+
+        public ShowDataPage(MainPageViewModel mainPageViewModel)
         {
             InitializeComponent();
+            _mainPageViewModel = mainPageViewModel;
+
+            this.BindingContext = _mainPageViewModel;
 
             /*
             userListView = new ObservableCollection<User>();
             
             userListView.Add(new User() { Username = "Alyssa", Password="abc" });
             userListView.Add(new User() { Username = "Brennan", Password="123" });
-
             BindingContext = this;
+            */
+
+
+
+            /*
+            if (!string.IsNullOrWhiteSpace(nameEntry.Text) && !string.IsNullOrWhiteSpace(ageEntry.Text))
+            {
+                await App.Database.SavePersonAsync(new Person
+                {
+                    Name = nameEntry.Text,
+                    Age = int.Parse(ageEntry.Text)
+                });
+
+                nameEntry.Text = ageEntry.Text = string.Empty;
+                listView.ItemsSource = await App.Database.GetPeopleAsync();
+            }
             */
         }
 
-        async void OnItemClicked (object sender, EventArgs e)
+        async void OnItemClicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
         }
