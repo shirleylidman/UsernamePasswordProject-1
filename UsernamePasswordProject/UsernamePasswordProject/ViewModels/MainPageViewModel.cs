@@ -1,9 +1,9 @@
-﻿using LocalDatabaseTutorial.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
+using UsernamePasswordProject.Models;
 using Xamarin.Forms;
 
 namespace UsernamePasswordProject.ViewModels
