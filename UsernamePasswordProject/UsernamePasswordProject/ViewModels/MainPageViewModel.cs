@@ -1,9 +1,9 @@
-﻿using System;
+﻿using LocalDatabaseTutorial.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
-using UsernamePasswordProject.Models;
 using Xamarin.Forms;
 
 namespace UsernamePasswordProject.ViewModels
@@ -19,6 +19,13 @@ namespace UsernamePasswordProject.ViewModels
         private string Username_;
         private string Password_;
 
+        private bool _userCreated;
+
+        public bool UserCreated
+        {
+            get { return _userCreated; }
+        }
+
         public MainPageViewModel()
         {
 
@@ -26,6 +33,7 @@ namespace UsernamePasswordProject.ViewModels
 
             SaveCommand = new Command(() =>
             {
+
                 var _user = new Account
                 {
                     Username = Username_,
@@ -33,12 +41,24 @@ namespace UsernamePasswordProject.ViewModels
 
                 };
 
-                _userListView.Add(_user);
-               
+                //call the save to database
 
-                Username = string.Empty;
-                Password = string.Empty;
+                //if the save returns an Account, then user already exists
 
+                //if the save returns null, then the user doesn't exist
+
+                _userCreated = false; //what the result of the save to database returns
+                var ar = new PropertyChangedEventArgs(nameof(UserCreated));
+                PropertyChanged?.Invoke(this, ar);
+
+                if (_userCreated)
+                {
+                    _userListView.Add(_user);
+                    Username = string.Empty;
+                    Password = string.Empty;
+                }
+                
+                
             });
 
         }

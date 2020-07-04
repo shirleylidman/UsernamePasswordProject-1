@@ -22,15 +22,21 @@ namespace UsernamePasswordProject.Views
             InitializeComponent();
 
             mainPageViewModel=new MainPageViewModel();
-
+            mainPageViewModel.PropertyChanged += MainPageViewModel_PropertyChanged;
             this.BindingContext = mainPageViewModel;
         }
 
-        async void OnSaveButtonClicked(object sender, EventArgs e)
+        private async void MainPageViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            if (e.PropertyName=="UserCreated")
+            {
+                if (mainPageViewModel.UserCreated)
+                    await Navigation.PushAsync(new ShowDataPage(mainPageViewModel));
+                else
+                    await DisplayAlert("Unavailable", "This username is already taken", "OK");
 
-            await Navigation.PushAsync(new ShowDataPage(mainPageViewModel));
-
+            }
         }
+
     }
 }

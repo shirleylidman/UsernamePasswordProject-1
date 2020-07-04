@@ -11,15 +11,16 @@
 
 <ContentPage.Content>
         <StackLayout Margin="20">
-            <Editor Placeholder="Username"
+            <Entry Placeholder="Username"
                     Text="{Binding Username}"
                     Margin="20"/>
-            <Editor Placeholder="Password"
+            <Entry Placeholder="Password"
                     Text="{Binding Password}"
-                    Margin="20"/>
+                    Margin="20"
+                    IsPassword="True"/>
             <Button Text="Save"
-                    Command ="{Binding SaveCommand}"
-                    Clicked="OnSaveButtonClicked"/>
+                    Command ="{Binding SaveCommand}"/>
+            
         </StackLayout>
     </ContentPage.Content>
 
